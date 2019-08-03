@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+require 'erb'
+require 'date'
+
+p "Enter the title."
+title = gets.chomp
+p "Enter the description"
+description = gets.chomp
+p "Enter repo link"
+repo_link = gets.chomp
+p "Enter the technologies used"
+tech_used = gets.chomp
+
+template = %q{
+# _<%= title %>_
+<%= Date.today.to_s %>
+By _**Shawna Duvall**_
+
+## Description
+_<%= description %>
+This repo is currently located at <%= repo_link %>._
+
+## Setup/Installation Requirements
+
+* _Clone this repository_
+* _Open files in text editor of your choice_
+* _Make changes as desired_
+* _Make frequent commits with detailed comments_
+* _Submit changes as pull request to Shawna at ShaDuv on Github_
+
+## Known Bugs
+_N/A_
+
+## Support and contact details
+_Update/make suggestions/refactor this code as you like. Please contact Shawna Duvall at shawnabduvall@gmail.com with questions._
+
+## Technologies Used
+_<%= tech_used %>_
+
+### License
+*This software is licensed under the MIT license*
+Copyright (c) 2019 **Shawna Duvall**
+}
+message = ERB.new(template)
+readme = message.result
+file = File.open("README.md", "w")
+file.puts readme
+file.close
